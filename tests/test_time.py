@@ -17,7 +17,11 @@ class TestTime(unittest.TestCase):
     def test_is_after(self):
         t1 = Time(9, 15, 12)
         t2 = Time(3, 28, 56)
-        self.assertFalse(Time.is_after(t1, t2))
+        self.assertTrue(Time.is_after(t1, t2))
+
+        t3 = Time(11, 3, 17)
+        self.assertTrue(Time.is_after(t3, t2))
+        self.assertFalse(Time.is_after(t2, t3))
 
 
 if __name__ == '__main__':

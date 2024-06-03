@@ -20,6 +20,6 @@ class Time:
         time_format = "%H:%M:%S"
         t1_time = datetime.strptime(t1.print_time(), time_format).time()
         t2_time = datetime.strptime(t2.print_time(), time_format).time()
-        return t2_time > t1_time
+        return t1_time > t2_time
 
 
