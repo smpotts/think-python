@@ -22,4 +22,22 @@ class Time:
         t2_time = datetime.strptime(t2.print_time(), time_format).time()
         return t1_time > t2_time
 
+    @staticmethod
+    def time_to_int(time):
+        minutes = time.hours * 60 + time.minutes
+        seconds = minutes * 60 + time.seconds
+        return seconds
+
+    @staticmethod
+    def int_to_time(seconds):
+        time = Time()
+        minutes, time.seconds = divmod(seconds, 60)
+        time.hours, time.minutes = divmod(minutes, 60)
+        return time
+
+    @staticmethod
+    def add_time(t1, t2):
+        seconds = Time.time_to_int(t1) + Time.time_to_int(t2)
+        return Time.int_to_time(seconds)
+
 

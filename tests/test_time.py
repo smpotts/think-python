@@ -23,6 +23,11 @@ class TestTime(unittest.TestCase):
         self.assertTrue(Time.is_after(t3, t2))
         self.assertFalse(Time.is_after(t2, t3))
 
+    def test_time_to_int_to_time(self):
+        t = Time(8, 54, 16)
+        self.assertEqual(Time.time_to_int(t), 32056)
+        self.assertEqual(Time.time_to_int(Time.int_to_time(32056)), 32056)
+
 
 if __name__ == '__main__':
     unittest.main()
