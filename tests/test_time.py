@@ -15,17 +15,13 @@ class TestTime(unittest.TestCase):
         self.assertEqual(t.print_time(), "09:45:02")
 
     def test_is_after(self):
-        t1 = Time(9, 15, 12)
-        t2 = Time(3, 28, 56)
-        self.assertTrue(Time.is_after(t1, t2))
-
-        t3 = Time(11, 3, 17)
-        self.assertTrue(Time.is_after(t3, t2))
-        self.assertFalse(Time.is_after(t2, t3))
+        t = Time(9, 15, 12)
+        self.assertTrue(t.is_after(Time(3, 28, 56)))
+        self.assertFalse(t.is_after(Time(11, 3, 17)))
 
     def test_time_to_int_to_time(self):
         t = Time(8, 54, 16)
-        self.assertEqual(Time.time_to_int(t), 32056)
+        self.assertEqual(t.time_to_int(), 32056)
         self.assertEqual(Time.time_to_int(Time.int_to_time(32056)), 32056)
 
 

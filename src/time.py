@@ -1,6 +1,3 @@
-from datetime import datetime
-
-
 class Time:
     """Represents the time of day.
     """
@@ -10,23 +7,30 @@ class Time:
         self.minutes = minutes
         self.seconds = seconds
 
+    def __str__(self):
+        return '%.2d:%.2d:%.2d' % (self.hours, self.minutes, self.seconds)
+
+    def __add__(self, other):
+        if isinstance(other, Time):
+            return self.add_time(self, other)
+        else:
+            return self.increment(other)
+
     def print_time(self):
         time_string = '%.2d:%.2d:%.2d' % (self.hours, self.minutes, self.seconds)
-        print(time_string)
         return time_string
 
-    @staticmethod
-    def is_after(t1, t2):
-        time_format = "%H:%M:%S"
-        t1_time = datetime.strptime(t1.print_time(), time_format).time()
-        t2_time = datetime.strptime(t2.print_time(), time_format).time()
-        return t1_time > t2_time
-
-    @staticmethod
-    def time_to_int(time):
-        minutes = time.hours * 60 + time.minutes
-        seconds = minutes * 60 + time.seconds
+    def time_to_int(self):
+        minutes = self.hours * 60 + self.minutes
+        seconds = minutes * 60 + self.seconds
         return seconds
+
+    def is_after(self, other):
+        return self.time_to_int() > other.time_to_int()
+
+    def increment(self, seconds):
+        seconds += self.time_to_int()
+        return self.int_to_time(seconds)
 
     @staticmethod
     def int_to_time(seconds):
